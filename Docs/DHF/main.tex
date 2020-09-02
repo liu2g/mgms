@@ -5,9 +5,15 @@
 \usepackage{authblk} %to extend author
 \usepackage{indentfirst} %to indent firt paragraph
 \usepackage{hyperref} %to use hyperlink
-\renewcommand{\chaptername}{}  %to delete chapter
 
-% define page size and margin
+% reformat chapter display
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{}{0pt}{\Huge}
+\titlespacing*{\chapter} {0pt}{20pt}{40pt}
+
+
+% reformat page size and margin
 \usepackage{geometry} 
 \geometry{
 	a4paper,
@@ -16,7 +22,7 @@
 	top=20mm,
 } 
 
-% format header and footer
+% reformat header and fotter
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancypagestyle{IHA-fancy-style}{%
@@ -33,7 +39,6 @@
 	\renewcommand{\headrulewidth}{0pt}% Line at the header invisible
 	\renewcommand{\footrulewidth}{0.4pt}% Line at the footer visible
 }
-
 
 
 
