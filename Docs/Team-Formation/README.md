@@ -1,3 +1,3 @@
-Includes initial team formation report
+# Includes initial team formation report
 * `doc` - reports
 * `slide` - presentation slides
