@@ -5,7 +5,7 @@ This is the repo for senior design of Sadie Gladden (gladdesm@mail.uc.edu), Alan
 Contains various assignments and documentation. See `Docs/`.
 DHF (Design History File) is located under `Docs/DHF/DHF-main.pdf`
 
-**WARNING: LaTeX pdfs are ignored. Please build them before submission**
+**WARNING: LaTeX pdfs are ignored. Please build them before submission.**
 
 ## Lecture files
 Contains documents that are downloaded on Canvas. See `LectureFiles/`.
