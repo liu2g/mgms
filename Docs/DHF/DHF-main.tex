@@ -1,10 +1,16 @@
 \documentclass[oneside,12pt]{book}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%            Include packages and redefine formats                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[DIV=14]{typearea} % to change page size on the fly
 \usepackage[utf8]{inputenc} %to import other docs
 \usepackage{graphicx} %to use pictures
 \usepackage{authblk} %to extend author
 \usepackage{indentfirst} %to indent firt paragraph
 \usepackage{hyperref} %to use hyperlink
+\usepackage{pgfgantt} %to insert gantt chart
+
 
 % reformat chapter display
 \usepackage{titlesec}
@@ -12,35 +18,19 @@
 \titlespacing*{\chapter} {0pt}{10pt}{20pt}
 
 
-% reformat page size and margin
-\usepackage{geometry} 
-\geometry{
-	a4paper,
-	total={170mm,257mm},
-	left=20mm,
-	top=20mm,
-} 
-
 % reformat header and fotter
 \usepackage{fancyhdr}
 \pagestyle{fancy}
-\fancypagestyle{IHA-fancy-style}{%
-	\fancyhf{}% Clear header and footer
-	\fancyhead[LE,RO]{\slshape \rightmark}
-	\fancyhead[LO,RE]{\slshape \leftmark}
-	\fancyfoot[C]{\thepage}% Custom footer
-	\renewcommand{\headrulewidth}{0.4pt}% Line at the header visible
-	\renewcommand{\footrulewidth}{0.4pt}% Line at the footer visible
-}
-\fancypagestyle{plain}{
-	\fancyhf{}%
-	\fancyfoot[C]{\thepage}%
-	\renewcommand{\headrulewidth}{0pt}% Line at the header invisible
-	\renewcommand{\footrulewidth}{0.4pt}% Line at the footer visible
-}
+\fancyhf{}
+\fancypagestyle{IHA-fancy-style}{\fancyfoot[C]{\thepage}}
+\fancypagestyle{plain}{\fancyfoot[C]{\thepage}}
+\renewcommand{\headrulewidth}{0pt}
 
 \renewcommand{\thesection}{\thechapter.\alph{section}} % section counts by letter
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                           Metadata                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \author[]{Alan Trester}
 \author[]{Sadie Gladden}
@@ -50,11 +40,13 @@
 \title{\textbf{Senior Design History File}}
 \date{Last Modified: \today}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                        Document starts                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 	\include{./TeX_files/1-Signature}
-	
-	
-	
 	\newpage
 	\frontmatter %pre-content page number
 	\maketitle
