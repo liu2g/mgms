@@ -27,7 +27,7 @@
 \renewcommand{\headrulewidth}{0pt}
 
 \renewcommand{\thesection}{\thechapter.\alph{section}} % section counts by letter
-
+\renewcommand{\bibname}{References}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                           Metadata                               %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -59,7 +59,10 @@
 	\include{./TeX_files/6-Testing}
 	\include{./TeX_files/7-Manage}
 	
-	\backmatter %post-content page number
-	% bibliography, glossary and index would go here.
+	\backmatter 
+	
+	\bibliography{Refs} 
+	\bibliographystyle{ieeetr}
+
 
 \end{document}
