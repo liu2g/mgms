@@ -7,5 +7,20 @@ DHF (Design History File) is located under `Docs/DHF/DHF-main.pdf`
 
 **WARNING: LaTeX pdfs are ignored. Please build them before submission.**
 
+
+
+**We are moving over to Overleaf for document sharing.**
+
+## Overleaf Links
+
+
+|                   | Edit Link                                       | View Link                                  |
+| ----------------- | ----------------------------------------------- | ------------------------------------------ |
+| DHF               | https://www.overleaf.com/8919111665qkryxcwchdpd | https://www.overleaf.com/read/wnfpjqsxngsz |
+| Detailed Proposal | https://www.overleaf.com/8429958394rzqztdpdwqmv | https://www.overleaf.com/read/kzdxtgszkwhv |
+
+
+
 ## Lecture files
+
 Contains documents that are downloaded on Canvas. See `LectureFiles/`.
