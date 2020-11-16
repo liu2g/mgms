@@ -39,7 +39,7 @@ sudo apt install gcc build-essential gcc-avr binutils-avr gdb-avr avr-libc avrdu
 
 ### On Windows
 
-The tools are bundled in a suit "WinAVR". This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/. Run the exe installer then all tools should be installed and available with a new terminal.
+The tools are bundled in a suite "WinAVR". This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/. Run the exe installer then all tools should be installed and available with a new terminal.
 
 
 
