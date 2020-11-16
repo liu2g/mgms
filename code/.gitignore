@@ -150,3 +150,5 @@ cython_debug/
 
 #Liu: yes I'm a normie I use VSCode
 **/.vscode/
+
+*.zip
