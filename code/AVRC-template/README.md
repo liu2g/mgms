@@ -1,4 +1,4 @@
-A simple template I made to compile and flash the AVR chip. --Liu
+A simple template I made to compile and flash the AVR chip, by Liu
 
 ## Usage
 
@@ -15,12 +15,25 @@ A simple template I made to compile and flash the AVR chip. --Liu
 
 ## Dependencies
 
-I am planning to make this compatible with both Linux and Windows, but I have not tested Windows yet.
+The required program is `avr-gcc` toolchain and `avrdude`. They have availability and the same interface on both Linux and Windows. To check if they are install, in a terminal, run
 
-On Linux, `avr-gcc` toolchain and `avrdude` are required for the `Makefile`. To install them with `apt`, simply run
+```
+> avr-gcc -v
+> avr-objcopy -V
+> make -v
+> avrdude
+```
+
+one line after the other. Basic help info will be printed If all tools are installed. 
+
+
+
+Installing the tools on Linux are well explained in many articles. On Ubuntu, they are already available to install with `apt`, so simply run
 
 ```bash
 sudo apt install gcc-avr binutils-avr gdb-avr avr-libc avrdude
 ```
 
-Windows compatibility is not tested yet.
+
+
+On Windows, the tools are bundled in a suit "WinAVR". This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/. Run the exe installer then all tools should be installed with a new terminal.
