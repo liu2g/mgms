@@ -29,22 +29,23 @@ avrdude
 
 one line after the other. Basic help info will be printed If all tools are installed. 
 
-
-
-
+### On Linux
 
 Installing the tools on Linux are well explained in many articles. On Ubuntu, they are already available to install with `apt`, so simply run
+
 ```bash
 sudo apt install gcc build-essential gcc-avr binutils-avr gdb-avr avr-libc avrdude
 ```
 
+### On Windows
 
-
-On Windows, the tools are bundled in a suit "WinAVR". This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/. Run the exe installer then all tools should be installed and available with a new terminal.
+The tools are bundled in a suit "WinAVR". This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/. Run the exe installer then all tools should be installed and available with a new terminal.
 
 
 
 ## USBTiny Driver
+
+### On Linux
 
 Driver for USBTiny is not required on Linux. However, to work with `avrdude`, a USB package called `libusb` is needed. To install this on Ubuntu, use `apt`:
 
@@ -52,8 +53,6 @@ Driver for USBTiny is not required on Linux. However, to work with `avrdude`, a 
 sudo apt install libusb-dev
 ```
 
-
-
-
+### On Windows
 
 On Windows, driver needs to be installed separately. This is available at https://github.com/adafruit/Adafruit_Windows_Drivers/releases. After installation, there should be an entry called "LibUSB-Win32 Devices / USBtinyISP AVR Programmer" in Device manager. 
