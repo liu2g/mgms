@@ -8,10 +8,14 @@ A simple template I made to compile and flash the AVR chip, by Liu
    - `make all` builds `main.c`, leaves `main.o` , `main.elf` and `main.hex` in the folder
    - `make clean` removes built files such as `main.o` , `main.elf` and `main.hex`
    - `make flash` builds source, flashes to ATMega328P, then removes the built files
+   - `make flashall` builds source, flashes to ATMega328P, but leaves files in the folder
+   - `make help` prints available commands
+   - `make config` prints current configurations
 4. In case of any errors, two suggestions on troubleshooting
    - Check if dependencies are installed
    - Give a `verbose=1` argument at the end of the command (eg. `make flash verbose=1`) to see more debug info
    - Edit the header in `Makefiles` to adjust your machine's settings
+     - Note that 
 
 ## Dependencies
 
@@ -31,9 +35,18 @@ one line after the other. Basic help info will be printed If all tools are insta
 Installing the tools on Linux are well explained in many articles. On Ubuntu, they are already available to install with `apt`, so simply run
 
 ```bash
-sudo apt install gcc-avr binutils-avr gdb-avr avr-libc avrdude
+sudo apt install gcc build-essential gcc-avr binutils-avr gdb-avr avr-libc avrdude
+```
+
+Flashing the program to a chip via possibly a USB port also requires `libusb`. To install on Ubuntu, 
+
+```bash
+sudo apt install libusb-dev
 ```
 
 
 
-On Windows, the tools are bundled in a suit "WinAVR". This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/. Run the exe installer then all tools should be installed with a new terminal.
+
+
+On Windows, the tools are bundled in a suit "WinAVR". This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/. Run the exe installer then all tools should be installed and available with a new terminal.
+

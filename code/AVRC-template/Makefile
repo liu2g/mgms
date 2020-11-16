@@ -9,8 +9,8 @@
 
 DEVICE     = atmega328p
 CLOCK      = 16000000
-PROGRAMMER = -c usbtiny -P usb
-OBJECTS    = main.o
+PROGRAMMER = usbtiny
+PORT       = usb
 FUSES      = -U lfuse:w:0x62:m -U hfuse:w:0xD9:m -U efuse:w:0xFF:m -U lock:w:0xFF:m
 
 
@@ -19,8 +19,21 @@ FUSES      = -U lfuse:w:0x62:m -U hfuse:w:0xD9:m -U efuse:w:0xFF:m -U lock:w:0xF
 
 # Tune the lines below only if you know what you are doing:
 
-AVRDUDE = avrdude -p $(DEVICE) $(PROGRAMMER)
+AVRDUDE = avrdude -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT)
 COMPILE = avr-gcc -std=gnu99 -Wall -Os -ffunction-sections -fdata-sections -DF_CPU=$(CLOCK)
+
+help: 
+	@echo "all         Build main.c, leaves main.o, main.elf and main.hex here"
+	@echo "clean       Remove built files such as main.o, main.elf and main.hex"
+	@echo "flash       Build source and flashes to AVR chip, then removes the built files"
+	@echo "flashall    Build source and flashes to AVR chip, but leaves all the files here"
+	@echo "config      Print the current build configurations"
+
+config:
+	@echo "DEVICE     : $(DEVICE)"
+	@echo "CLOCK      : $(CLOCK)"
+	@echo "PROGRAMMER : $(PROGRAMMER)"
+	@echo "PORT       : $(PORT)"
 
 # symbolic targets:
 all:	main.hex
@@ -42,6 +55,9 @@ flash:	all
 	$(AVRDUDE) -U flash:w:main.hex:i
 	rm -f *.hex *.elf *.o
 
+flashall:	all
+	$(AVRDUDE) -U flash:w:main.hex:i
+
 fuse:
 	$(AVRDUDE) $(FUSES)
 
@@ -55,8 +71,8 @@ clean:
 	rm -f *.hex *.elf *.o
 
 # file targets:
-main.elf: $(OBJECTS)
-	$(COMPILE) -mmcu=$(DEVICE) -Wl,--gc-sections $(OBJECTS) -o main.elf 
+main.elf: main.o
+	$(COMPILE) -mmcu=$(DEVICE) -Wl,--gc-sections main.o -o main.elf 
 
 main.hex: main.elf
 	rm -f main.hex
