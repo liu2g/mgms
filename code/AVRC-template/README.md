@@ -11,7 +11,7 @@ A simple template I made to compile and flash the AVR chip, by Liu
    - `make flashrm` builds source, flashes to ATMega328P, but removes the built files
    - `make help` prints available commands
    - `make config` prints current configurations
-   - NOTE: `clean` and `flashrm` IS BROKEN UNDER WINDOWS UNLESS USING WSL OR CYGWIN
+   - NOTE: `clean` and `flashrm` IS BROKEN UNDER WINDOWS UNLESS USING WSL OR CYGWIN DUE TO `rm` NOT AVAILABLE
 4. In case of any errors, two suggestions on troubleshooting
    - Check if dependencies are installed
    - Give a `verbose=1` argument at the end of the command (eg. `make flash verbose=1`) to see more debug info
