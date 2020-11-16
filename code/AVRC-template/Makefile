@@ -1,11 +1,10 @@
 # DEVICE ....... The AVR device you compile for
 # CLOCK ........ Target AVR clock rate in Hertz
-# OBJECTS ...... The object files created from your source files. This list is
-#                usually the same as the list of source files with suffix ".o".
 # PROGRAMMER ... Options to avrdude which define the hardware you use for
 #                uploading to the AVR and the interface where this hardware
 #                is connected.
 # FUSES ........ Parameters for avrdude to flash the fuses appropriately.
+# ATTENTION: FUSES ABOVE CAN BREAK YOUR CHIP!!!! Please Google "ATXXX fuse calculator" for your specific chip
 
 DEVICE     = atmega328p
 CLOCK      = 16000000
@@ -13,21 +12,27 @@ PROGRAMMER = usbtiny
 PORT       = usb
 FUSES      = -U lfuse:w:0x62:m -U hfuse:w:0xD9:m -U efuse:w:0xFF:m -U lock:w:0xFF:m
 
-
 ######################################################################
 ######################################################################
 
 # Tune the lines below only if you know what you are doing:
+ifdef verbose
+VERB = -v
+else
+VERB = 
+endif
 
-AVRDUDE = avrdude -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT)
-COMPILE = avr-gcc -std=gnu99 -Wall -Os -ffunction-sections -fdata-sections -DF_CPU=$(CLOCK)
+
+AVRDUDE = avrdude -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) $(VERB)
+COMPILE = avr-gcc -std=gnu99 -Wall -Os -ffunction-sections -fdata-sections -DF_CPU=$(CLOCK) $(VERB)
 
 help: 
 	@echo "all         Build main.c, leaves main.o, main.elf and main.hex here"
 	@echo "clean       Remove built files such as main.o, main.elf and main.hex"
 	@echo "flash       Build source and flashes to AVR chip, then removes the built files"
-	@echo "flashall    Build source and flashes to AVR chip, but leaves all the files here"
+	@echo "flashrm    Build source and flashes to AVR chip, but leaves all the files here"
 	@echo "config      Print the current build configurations"
+	@echo "NOTE: clean and flashrm IS BROKEN UNDER WINDOWS UNLESS USING WSL OR CYGWIN"
 
 config:
 	@echo "DEVICE     : $(DEVICE)"
@@ -53,10 +58,10 @@ all:	main.hex
 
 flash:	all
 	$(AVRDUDE) -U flash:w:main.hex:i
-	rm -f *.hex *.elf *.o
-
-flashall:	all
+	
+flashrm:	all
 	$(AVRDUDE) -U flash:w:main.hex:i
+	rm -f *.hex *.elf *.o
 
 fuse:
 	$(AVRDUDE) $(FUSES)

@@ -6,7 +6,6 @@
 # FUSES ........ Parameters for avrdude to flash the fuses appropriately.
 # ATTENTION: FUSES ABOVE CAN BREAK YOUR CHIP!!!! Please Google "ATXXX fuse calculator" for your specific chip
 
-
 DEVICE     = atmega328p
 CLOCK      = 16000000
 PROGRAMMER = -c usbtiny -P usb
