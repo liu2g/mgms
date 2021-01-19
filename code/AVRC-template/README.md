@@ -31,7 +31,7 @@ one line after the other. Basic help info will be printed If all tools are insta
 
 ### On Linux
 
-Installing the tools on Linux are well explained in many articles. On Ubuntu, they are already available to install with `apt`, so simply run
+Installing the tools on Linux are well explained in many articles. On Ubuntu/Debian, they are  available to install with `apt`, so simply run
 
 ```bash
 sudo apt install gcc build-essential gcc-avr binutils-avr gdb-avr avr-libc avrdude
@@ -47,7 +47,7 @@ The tools are bundled in a suite "WinAVR". This is available to download at http
 
 ### On Linux
 
-Driver for USBTiny is not required on Linux. However, to work with `avrdude`, a USB package called `libusb` is needed. To install this on Ubuntu, use `apt`:
+Driver for USBTiny is not required on Linux. However, to work with `avrdude`, a USB package called `libusb` is needed. To install this on Ubuntu/Debian, use `apt`:
 
 ```bash
 sudo apt install libusb-dev
