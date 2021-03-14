@@ -39,9 +39,12 @@ all:	main.hex
 .c.s:
 	$(COMPILE) -S $< -o $@
 
-flash:	all
+flashrm:	all
 	$(AVRDUDE) -U flash:w:main.hex:i
 	rm -f *.hex *.elf *.o
+
+flash:	all
+	$(AVRDUDE) -U flash:w:main.hex:i
 
 fuse:
 	$(AVRDUDE) $(FUSES)

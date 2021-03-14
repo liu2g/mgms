@@ -32,8 +32,8 @@
 #ifndef _SEEED_SHT35_H
 #define _SEEED_SHT35_H
 
-#include "Arduino.h"
-#include "Wire.h"
+// #include "Arduino.h"
+// #include "Wire.h"
 
 
 #ifndef SEEED_DN_DEFINES
