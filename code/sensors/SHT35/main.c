@@ -38,7 +38,7 @@ int main (void) {
         // PORTB = 0b00000000; //LED off
         // _delay_ms (500);
 
-        error_code = SHT_check(&status);
+        // error_code = SHT_check(&status);
 
         if (DEBUG_MODE) {
             itoa(error_code, DataString, 16); 
@@ -62,7 +62,7 @@ int main (void) {
 
         }
 
-        error_code = SHT_measure_debug(&temp, &hum);
+        error_code = SHT_measure(&temp, &hum);
 
         
         _delay_ms (1000);
