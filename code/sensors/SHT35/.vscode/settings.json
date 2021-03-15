@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "io.h": "c",
-        "stdbool.h": "c",
-        "twi_lib.h": "c"
-    }
-}
