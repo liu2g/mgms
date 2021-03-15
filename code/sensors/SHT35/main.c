@@ -8,6 +8,7 @@
 #include "SHT_lib.h"
 
 
+
 #define FOSC 16000000 // Clock Speed
 #define BAUD 9600
 #define UBRR ((FOSC/16/BAUD) -1)
@@ -26,7 +27,6 @@ int main (void) {
     uint16_t error_code = SHT_init();
     uint16_t temp = 10;
     uint16_t hum = 10;
-    uint16_t status = 10;
     char DataString[20];
     _delay_ms(100);
 
@@ -45,20 +45,15 @@ int main (void) {
             UART_transmit_ln(DataString);
         } 
         else {
-            itoa(temp, DataString, 16);
+            itoa(temp, DataString, 10);
             UART_transmit(DataString);
 
             DataString[0] = '\t';
             UART_transmit(DataString);
 
-            itoa(hum, DataString, 16);
-            UART_transmit(DataString);
-
-            DataString[0] = '\t';
-            UART_transmit(DataString);
-
-            itoa(status, DataString, 16);
+            itoa(hum, DataString, 10);
             UART_transmit_ln(DataString);
+
 
         }
 

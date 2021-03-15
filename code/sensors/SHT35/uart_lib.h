@@ -29,7 +29,7 @@ void UART_transmit(char msg[]){
         i++;                             /* increment counter                    */
     }
     
-    strcpy(msg, "");
+    memset(msg, 0, strlen(msg));
 }
 
 void UART_transmit_ln(char msg[]){
@@ -48,7 +48,7 @@ void UART_transmit_ln(char msg[]){
         i++;                             /* increment counter                    */
     }
     
-    strcpy(msg, "");
+    memset(msg, 0, strlen(msg));
 
     /* Sending '\n'  '\r' Character pair helps to format the output properly on console putty Screen */
     /*************************************************************************************************/
