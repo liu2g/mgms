@@ -3,8 +3,6 @@
 # PROGRAMMER ... Options to avrdude which define the hardware you use for
 #                uploading to the AVR and the interface where this hardware
 #                is connected.
-# FUSES ........ Parameters for avrdude to flash the fuses appropriately.
-# ATTENTION: FUSES ABOVE CAN BREAK YOUR CHIP!!!! Please Google "ATXXX fuse calculator" for your specific chip
 
 DEVICE     = atmega328p
 CLOCK      = 16000000

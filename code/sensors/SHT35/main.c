@@ -1,4 +1,10 @@
-#define __AVR_ATmega328P__ //import register names
+/*
+* main.c
+*
+* Created: 2021-03-19
+*/
+
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdlib.h>
@@ -6,7 +12,6 @@
 #include <stdint.h>
 #include "uart_lib.h"
 #include "SHT_lib.h"
-
 
 
 #define FOSC 16000000 // Clock Speed
@@ -25,20 +30,13 @@ int main (void) {
 
 	UART_init(UBRR);
     uint16_t error_code = SHT_init();
-    uint16_t temp = 10;
-    uint16_t hum = 10;
+    float temp = 10;
+    float hum = 10;
     char DataString[20];
     _delay_ms(100);
 
     while (1) {
-        // blink() // this is in extralib
 
-        // PORTB = 0b00100000; //LED on
-        // _delay_ms (500);
-        // PORTB = 0b00000000; //LED off
-        // _delay_ms (500);
-
-        // error_code = SHT_check(&status);
 
         if (DEBUG_MODE) {
             itoa(error_code, DataString, 16); 
@@ -53,13 +51,10 @@ int main (void) {
 
             itoa(hum, DataString, 10);
             UART_transmit_ln(DataString);
-
-
         }
 
         error_code = SHT_measure(&temp, &hum);
 
-        
         _delay_ms (1000);
     }
     return(0);
