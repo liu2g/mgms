@@ -1,17 +1,23 @@
 An integraded sensor module for the project, by Alan.
 
 # Hardware
+
 **Sensors**
+
 - Grove - I2C High Accuracy Temp & Humi Sensor (SHT35). Available at https://www.seeedstudio.com/Grove-I2C-High-Accuracy-Temp-Humi-Sensor-SHT35.html.
 - Vegetronix VH400 Low-Cost Soil Moisture Sensors. Available at https://www.vegetronix.com/Products/VH400/.
 - Vegetronix THERM200 Soil Temperature Sensor Probes. Available at https://www.vegetronix.com/Products/THERM200/.
 
 **Microcontroller**
+
 ATmega328p embedded on Arduino Uno board, programmed with [USBtinyISP](https://learn.adafruit.com/usbtinyisp).
 
 # Software
+
 `twi_lib` is the base I2C library based off [Sovichea Tep's library](https://github.com/Sovichea/avr-i2c-library).
+
 `SHT35_lib` is I2C wrapper that sends appropiate command for the specific sensor.
+
 `AnalogSensors` is library that decode two analog soil sensors.
 
 # Usage
