@@ -1,8 +1,8 @@
 Working firmware prototype for SHT35 air temperature / humidity sensor, by Liu
 
 # Hardware
-**Sensor**
-Grove - I2C High Accuracy Temp & Humi Sensor (SHT35). Available at https://www.seeedstudio.com/Grove-I2C-High-Accuracy-Temp-Humi-Sensor-SHT35.html.
+**Sensors**
+- Grove - I2C High Accuracy Temp & Humi Sensor (SHT35). Available at https://www.seeedstudio.com/Grove-I2C-High-Accuracy-Temp-Humi-Sensor-SHT35.html.
 
 **Microcontroller**
 ATmega328p embedded on Arduino Uno board, programmed with [USBtinyISP](https://learn.adafruit.com/usbtinyisp).
