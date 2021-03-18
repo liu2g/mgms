@@ -41,6 +41,7 @@ sudo apt install gcc build-essential gcc-avr binutils-avr gdb-avr avr-libc avrdu
 
 The tools are bundled in a suite "WinAVR". This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/. Run the exe installer then all tools should be installed and available with a new terminal.
 
+In addition, the `clean` command uses `rm` that is not available on Windows. You can use Cygwin shell by downloading [here](https://www.cygwin.com/) or it's bundled with Git Bash from [Git on Windows](https://git-scm.com/download/win). Currently these are only two workarounds.
 
 
 ## USBTiny Driver

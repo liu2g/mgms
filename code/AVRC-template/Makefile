@@ -14,17 +14,22 @@ FUSES      = -U lfuse:w:0x62:m -U hfuse:w:0xD9:m -U efuse:w:0xFF:m -U lock:w:0xF
 
 ######################################################################
 ######################################################################
-
 # Tune the lines below only if you know what you are doing:
+
 ifdef verbose
 VERB = -v
 else
 VERB = 
 endif
 
-
 AVRDUDE = avrdude -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) $(VERB)
-COMPILE = avr-gcc -std=gnu99 -Wall -Os -ffunction-sections -fdata-sections -DF_CPU=$(CLOCK) $(VERB)
+COMPILE = avr-gcc -std=gnu99 -Wall -Os -ffunction-sections -fdata-sections -mmcu=$(DEVICE) -DF_CPU=$(CLOCK) $(VERB)
+
+# Generate lookup table in project directory
+SOURCES = $(wildcard *.c)
+OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
+
+# High level rules
 
 help: 
 	@echo "all         Build main.c, leaves main.o, main.elf and main.hex here"
@@ -40,52 +45,44 @@ config:
 	@echo "PROGRAMMER : $(PROGRAMMER)"
 	@echo "PORT       : $(PORT)"
 
-# symbolic targets:
-all:	main.hex
 
-.c.o:
-	$(COMPILE) -c $< -o $@
-
-.S.o:
-	$(COMPILE) -x assembler-with-cpp -c $< -o $@
-# "-x assembler-with-cpp" should not be necessary since this is the default
-# file type for the .S (with capital S) extension. However, upper case
-# characters are not always preserved on Windows. To ensure WinAVR
-# compatibility define the file type manually.
-
-.c.s:
-	$(COMPILE) -S $< -o $@
-
-flash:	all
+flash:
+	$(MAKE) clean
+	$(MAKE) build
+	@echo "==========FLASHING=========="
 	$(AVRDUDE) -U flash:w:main.hex:i
 	
-flashrm:	all
-	$(AVRDUDE) -U flash:w:main.hex:i
-	rm -f *.hex *.elf *.o
+flashrm:	flash
+	$(MAKE) clean
 
-fuse:
-	$(AVRDUDE) $(FUSES)
 
-install: flash fuse
-
-# if you use a bootloader, change the command below appropriately:
-load: all
-	bootloadHID main.hex
+# Step-by-step rules
+build: 
+	@echo "==========BUILDING=========="
+	$(MAKE) all
 
 clean:
+	@echo "==========CLEANING=========="
 	rm -f *.hex *.elf *.o
 
-# file targets:
-main.elf: main.o
-	$(COMPILE) -mmcu=$(DEVICE) -Wl,--gc-sections main.o -o main.elf 
+# File targets
+all:	main.hex
+
+%.o: %.c
+	@echo "----------compile----------"
+	$(COMPILE) -c $< -o $@
+
+
+main.elf: $(OBJECTS)
+	@echo "----------link objects----------"
+	$(COMPILE) -Wl,--gc-sections $(OBJECTS) -o main.elf 
 
 main.hex: main.elf
-	rm -f main.hex
+	@echo "----------generate bin----------"
 	avr-objcopy -j .text -j .data -R .eeprom -O ihex main.elf main.hex
-# If you have an EEPROM section, you must also create a hex file for the
-# EEPROM and add it to the "flash" target.
 
-# Targets for code debugging and analysis:
+
+# Debugging and analysis
 disasm:	main.elf
 	avr-objdump -d main.elf
 
