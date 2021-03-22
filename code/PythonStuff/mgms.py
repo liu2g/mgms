@@ -37,11 +37,10 @@ def compare_radios(a, b):
     return 0
 
 
-test = b'0\r13A200\r40D51989\r24\rTest Responder\r\r0\rXXXXXX\rYYYYYYYY\r24\rTest Responder\r\r0\rAAAAAA\rBBBBBBBB\r24\rTest Responder\r\r\r'
-
-
 def parse_radio_ids(radio_ids):
     temp_radio_list = []
+    radio_ids = radio_ids.replace(b'OK\r', b'')
+    radio_ids = radio_ids.replace(b'EEww\r', b'')
     temp = radio_ids.split(b'\r\r')
     for x in range(len(temp) - 1):
         radio = temp[x].split(b'\r')
@@ -60,9 +59,11 @@ def parse_radio_ids(radio_ids):
 
 
 def compare_radio_list(temp_radio_list):
+    new_radio = 0
     if len(RADIO_LIST) == 0:
         for each in temp_radio_list:
             RADIO_LIST.append(each)
+            new_radio = new_radio + 1
     else:
         for each in temp_radio_list:
             contains = 0
@@ -71,8 +72,17 @@ def compare_radio_list(temp_radio_list):
                     contains = contains + 1
             if contains == 0:
                 RADIO_LIST.append(each)
-    return
+                new_radio = new_radio + 1
+    return new_radio
 
+def get_radio_names():
+    name = []
+    if len(RADIO_LIST) == 0:
+        return name
+    else:
+        for each in RADIO_LIST:
+            name.append(each.NI)
+        return name
 
 def get_sampling_freq_input():
     # TODO: Link these to buttons or something or make GUI to set?
@@ -90,7 +100,7 @@ def scan_for_radios(serial_port):
     # TODO: use this function to scan for new or existing radios and update radio list/struct/whatever
     ser = serial.Serial(serial_port)
 
-    ser.write(b'\r\r')
+    ser.write(b'\r')
     time.sleep(1.5)
     # enables command mode (1.5 sec delay is necessary)
     ser.write(b'+++')
@@ -125,51 +135,54 @@ def scan_for_radios(serial_port):
 
 def sample_radios(serial_port):
     # List for storing radio data (to Return)
-    for each in RADIO_LIST:
-        # opens serial port
-        ser = serial.Serial(serial_port)
+    if len(RADIO_LIST) > 1:
+        for each in RADIO_LIST:
+            # opens serial port
+            ser = serial.Serial(serial_port)
 
-        # enables command mode (1.5 sec delay is necessary)
-        ser.write(b'\r\r')
-        time.sleep(1.5)
-        ser.write(b'+++')
-        time.sleep(1.5)
-        print('Initiate command mode waiting for OK')
-        line = ser.read_until(b'\r', size=None)
-        print('data from radio {}'.format(line))  # debugging line
-        # command mode calls
-        DH = b'ATDH 00' + each.SH + b'\r'
-        ser.write(DH)  # Correct DH testing
-        time.sleep(1.5)
-        print('waiting for OK')
-        line = ser.read_until(b'\r', size=None)
+            # enables command mode (1.5 sec delay is necessary)
+            ser.write(b'\r\r')
+            time.sleep(1.5)
+            ser.write(b'+++')
+            time.sleep(1.5)
+            print('Initiate command mode waiting for OK')
+            line = ser.read_until(b'\r', size=None)
+            print('data from radio {}'.format(line))  # debugging line
+            # command mode calls
+            DH = b'ATDH 00' + each.SH + b'\r'
+            ser.write(DH)  # Correct DH testing
+            time.sleep(1.5)
+            print('waiting for OK')
+            line = ser.read_until(b'\r', size=None)
 
-        DL = b'ATDL ' + each.SL + b'\r'
-        ser.write(DL)  # Correct DL testing
-        time.sleep(1.5)
-        print('waiting for OK')
-        line = ser.read_until(b'\r', size=None)
+            DL = b'ATDL ' + each.SL + b'\r'
+            ser.write(DL)  # Correct DL testing
+            time.sleep(1.5)
+            print('waiting for OK')
+            line = ser.read_until(b'\r', size=None)
 
-        # closes command mode
-        ser.write(b'ATCN\r')
-        time.sleep(1.5)
-        print('Command ATCN mode waiting for OK')
-        line = ser.read_until(b'\r', size=None)
-        print('data from radio {}'.format(line))  # debugging line
+            # closes command mode
+            ser.write(b'ATCN\r')
+            time.sleep(1.5)
+            print('Command ATCN mode waiting for OK')
+            line = ser.read_until(b'\r', size=None)
+            print('data from radio {}'.format(line))  # debugging line
 
-        # requests data
-        ser.write(b'Request Info\r')
-        print('trying to get response from radio info request')  # debugging/breadcrumb line
-        time.sleep(1.5)
-        # line = ser.readline()
-        line = ser.read_until(b'\r', size=None)
-        print('data from radio {}'.format(line))  # debugging line
-        radio_data = line
+            # requests data
+            ser.write(b'Request Info\r')
+            print('trying to get response from radio info request')  # debugging/breadcrumb line
+            time.sleep(1.5)
+            # line = ser.readline()
+            line = ser.read_until(b'\r\r', size=None)
+            print('data from radio {}'.format(line))  # debugging line
+            radio_data = line
 
-        # closes serial port
-        ser.close()
-    # return radio data to main function
-    # NEED RADIO WITH DUMMY DATA FROM ALAN
+            # closes serial port
+            ser.close()
+        # return radio data to main function
+        # NEED RADIO WITH DUMMY DATA FROM ALAN
+    else:
+        radio_data = b'No Radios Set Up\r'
     return radio_data
 
 
@@ -218,17 +231,22 @@ def show_gui(parsed_data):
     # Buttons to close out of gui
     button_ok = sg.Column(
         [[sg.Button('Close', font=('Arial', 12), pad=((0, 20), (10, 10)))]],
-        element_justification='left', key='COL5')
+        element_justification='right', key='COL7')
 
     # Button to scan for radios
     button_scan = sg.Column(
         [[sg.Button('Scan for Radios', font=('Arial', 12), pad=((20, 0), (10, 10)), key='scan')]],
+        element_justification='left', key='COL5')
+
+    # Button to collect data
+    button_collect = sg.Column(
+        [[sg.Button('Collect Data', font=('Arial', 12), pad=((20, 0), (10, 10)), key='collect')]],
         element_justification='right', key='COL6')
 
     # everything that shows up in the GUI
     layout = [[description],
               [data_types, sensor_data, data_buttons],
-              [button_ok, button_scan]]
+              [button_scan, button_collect], [button_ok]]
 
     # create and open window
     window = sg.Window(layout=layout, title='Modular Garden Monitoring System', margins=(0, 0),
@@ -244,8 +262,18 @@ def show_gui(parsed_data):
 
         # Popup for scanning for radios
         if event == 'scan':
-            new_radios = 0
-            sg.Popup('Successfully Scanned for Radios.', f'Found {new_radios} new radios.', title='Scan for Radios')
+            test_radio_list = scan_for_radios('COM4')  # using windows - /dev/ttyUSB0 for linux
+            radios = parse_radio_ids(test_radio_list)  # takes scanned radios and creates radio objects
+            new_radios = compare_radio_list(radios)  # Compares list of radio objects to MASTER RADIO LIST
+            names = get_radio_names()
+            sg.Popup('Successfully Scanned for Radios.', f'Found {new_radios} new radios.', f'Radios: {names}', title='Scan for Radios')
+
+        # Popup for collect current data
+        if event == 'collect':
+            sample_radios('COM4')
+            names = get_radio_names()
+            sg.Popup(f'Successfully Collected Current Data From {len(RADIO_LIST)} Radios.', f'Radios: {names}',
+                     title='Current Data')
 
         # Popup for Soil Moisture
         if event == 'soil_m':
@@ -286,28 +314,28 @@ def main():
     # Step 1: Collect Sensor Data
     # TODO RECIEVE AND PARSE DATA
     #############################TESTING AREA COMMAND MODE SHIT#########################################################
-    test_radio_list = scan_for_radios('COM3')  # using windows - /dev/ttyUSB0 for linux
-    radios = parse_radio_ids(test_radio_list) # takes scanned radios and creates radio objects
-    compare_radio_list(radios) # Compares list of radio objects to MASTER RADIO LIST
-    print("radio list after first addition")
-    for each in RADIO_LIST:
-        each.print_data()
-    sample_radios('COM3') # "Samples" from single radio
+    #test_radio_list = scan_for_radios('COM4')  # using windows - /dev/ttyUSB0 for linux
+    #radios = parse_radio_ids(test_radio_list) # takes scanned radios and creates radio objects
+    #compare_radio_list(radios) # Compares list of radio objects to MASTER RADIO LIST
+    #print("radio list after first addition")
+    #for each in RADIO_LIST:
+    #    each.print_data()
+    #sample_radios('COM4') # "Samples" from single radio
 
     ####################################################################################################################
     ###############################TESTING AREA FOR SCANNING FOR RADIOS#################################################
-    test_radio_list = scan_for_radios('COM3') # using windows - /dev/ttyUSB0 for linux
-    radios = parse_radio_ids(test_radio_list) # scans for single radio i have
-    compare_radio_list(radios)
-    print("radio list after first addition")
-    for each in RADIO_LIST:
-        each.print_data()
+    #_radio_list = scan_for_radios('COM4') # using windows - /dev/ttyUSB0 for linux
+    #radios = parse_radio_ids(test_radio_list) # scans for single radio i have
+    #compare_radio_list(radios)
+    #print("radio list after first addition")
+    #for each in RADIO_LIST:
+    #    each.print_data()
 
-    radios = parse_radio_ids(test) # testing for recieving multiple radios from ATND test is a dummy byte strand
-    compare_radio_list(radios)
-    print("radio list after second and third addition and one repeat radio")
-    for each in RADIO_LIST:
-        each.print_data()
+
+    #compare_radio_list(radios)
+    #print("radio list after second and third addition and one repeat radio")
+    #for each in RADIO_LIST:
+    #    each.print_data()
     ###################################################################################################################
     # Step 2: Parse Collected Data
     # Alan has data format ready
