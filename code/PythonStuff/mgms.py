@@ -287,10 +287,14 @@ def show_gui(parsed_data):
         [[sg.Button('Collect Data', font=('Arial', 12), pad=((20, 0), (10, 10)), key='collect')]],
         element_justification='right', key='COL6')
 
+    button_setup = sg.Column(
+        [[sg.Button('Setup', font=('Arial', 12), pad=((20, 0), (10, 10)), key='setup')]],
+        element_justification='right', key='COL9')
+
     # everything that shows up in the GUI
     layout = [[description],
               [data_types, sensor_data, data_buttons],
-              [button_scan, button_collect], [button_ok, button_clear]]
+              [button_scan, button_collect], [button_ok, button_setup]]
 
     # create and open window
     window = sg.Window(layout=layout, title='Modular Garden Monitoring System', margins=(0, 0),
@@ -341,10 +345,14 @@ def show_gui(parsed_data):
                 sg.Popup(f'Successfully Collected Current Data From {len(RADIO_LIST)} Radios.', f'Radio Names: {names}',
                          f'Raw Radio Data: {parsed_radio_data}', title='Current Data')
 
+
         # Popup for clear radio list internal use only
         if event == 'clear':
             clear_radio_list()
 
+        # Popup to set collection time
+        if event == 'setup':
+            sample_freq = sg.popup_get_text('Please enter a sampling frequency in minutes', title='Setup')
 
         # Popup for Soil Moisture
         if event == 'soil_m':
