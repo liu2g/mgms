@@ -11,10 +11,14 @@ import PySimpleGUI as sg  # https://pysimplegui.readthedocs.io/en/latest/
 import time  # time.sleep(N) ~ sleep for N (float) seconds
 import matplotlib.pyplot as plt  # https://matplotlib.org/stable/contents.html
 import numpy as np
+import time, traceback
+import threading
+
 
 RADIO_LIST = []
 RADIO_DATA_PULL = []
 PARSED_RADIO_DATA = []
+SAMPLE_RATE = 15
 
 
 # TODO: radio struct? updated with get radios that contains radios name, location, DH, DL, etc.
@@ -59,8 +63,13 @@ def parse_radio_ids(radio_ids):
     # print(temp)
     return temp_radio_list
 
+def get_sample_rate():
+    return SAMPLE_RATE
+
+
 def clear_historical_data():
     return
+
 
 def compare_radio_list(temp_radio_list):
     new_radio = 0
@@ -91,20 +100,13 @@ def get_radio_names():
         return name
 
 
-def get_sampling_freq_input():
+def set_sampling_freq(input):
     # TODO: Link these to buttons or something or make GUI to set?
-    sampling_frequency = int(input("How often would you like to sample data?\nPlease enter a number in minutes.\n"))
-    return sampling_frequency
-
-
-def get_radio_name_input():
-    # TODO: Link these to buttons or something or make GUI to set?
-    radio_name = input("How would you like to identify this radio?\n")
-    return radio_name
+    SAMPLE_RATE = input
+    return
 
 
 def scan_for_radios(serial_port):
-    # TODO: use this function to scan for new or existing radios and update radio list/struct/whatever
     ser = serial.Serial(serial_port, timeout=3)
 
     ser.write(b'\r')
@@ -216,9 +218,29 @@ def parse_radio_data(data):
     return PARSED_RADIO_DATA
 
 
+def background_collection(delay, stop, task):
+    next_time = time.time() + delay
+    while True:
+        if stop():
+            break
+        time.sleep(max(0, next_time - time.time()))
+        try:
+            task()
+        except Exception:
+            traceback.print_exc()
+            # in production code you might want to have this instead of course:
+            # logger.exception("Problem while executing repetitive task.")
+        # skip tasks if we are behind schedule:
+        next_time += (time.time() - next_time) // delay * delay + delay
+
+
+def test_background():
+    print("test time:", time.asctime(time.localtime(time.time())))
+
+
 def store_parsed_data(data):
-    # Takes collected dataa and stores it
     return
+
 
 def clear_radio_list():
     RADIO_LIST.clear()
@@ -230,7 +252,7 @@ def parse_data(sensor_data):
     return sensor_data.split(',')
 
 
-def show_gui(parsed_data):
+def show_gui(parsed_data, thread):
     # green theme for green project
     sg.theme('Green')
 
@@ -272,7 +294,7 @@ def show_gui(parsed_data):
         [[sg.Button('Close', font=('Arial', 12), pad=((0, 20), (10, 10)))]],
         element_justification='right', key='COL7')
 
-    #Button Clears Radios...
+    # Button Clears Radios...
     button_clear = sg.Column(
         [[sg.Button('Clear', font=('Arial', 12), pad=((20, 0), (10, 10)), key='clear')]],
         element_justification='left', key='COL8')
@@ -291,10 +313,16 @@ def show_gui(parsed_data):
         [[sg.Button('Setup', font=('Arial', 12), pad=((20, 0), (10, 10)), key='setup')]],
         element_justification='right', key='COL9')
 
+    button_auto_collect = sg.Column(
+        [[sg.Button('Auto Collect', font=('Arial', 12), pad=((20, 0), (10, 10)), key='auto_collect')]],
+        element_justification='right', key='COL10')
+
     # everything that shows up in the GUI
     layout = [[description],
               [data_types, sensor_data, data_buttons],
-              [button_scan, button_collect], [button_ok, button_setup]]
+              [button_scan, button_collect],
+              [button_ok, button_setup],
+              [button_auto_collect]]
 
     # create and open window
     window = sg.Window(layout=layout, title='Modular Garden Monitoring System', margins=(0, 0),
@@ -317,22 +345,25 @@ def show_gui(parsed_data):
                 num_radios = compare_radio_list(radios)  # Compares list of radio objects to MASTER RADIO LIST
                 names = get_radio_names()
                 if len(radios) == 0:
-                    sg.Popup('Successfully Scanned for Radios.', f'{len(RADIO_LIST)} Current Radios.\nNo New Radios Found',
+                    sg.Popup('Successfully Scanned for Radios.',
+                             f'{len(RADIO_LIST)} Current Radios.\nNo New Radios Found',
                              'Please Ensure Your Radio Is In Range And Powered On', title='Scan for Radios')
                 elif prev_num_radios > len(radios):
                     lost_radios = prev_num_radios - num_radios
-                    sg.Popup('Successfully Scanned for Radios.', f'Found {num_radios} radios.', f'Number of Radios Lost: '
-                         f'{lost_radios}' ,f'Current Radios: {names}', title='Scan for Radios')
+                    sg.Popup('Successfully Scanned for Radios.', f'Found {num_radios} radios.',
+                             f'Number of Radios Lost: '
+                             f'{lost_radios}', f'Current Radios: {names}', title='Scan for Radios')
                 elif prev_num_radios < len(radios):
                     total_radios = prev_num_radios + num_radios
-                    sg.Popup('Successfully Scanned for Radios.', f'Found {total_radios} radios.', f'Number of New Radios: '
-                         f'{num_radios}', f'Current Radios: {names}', title='Scan for Radios')
+                    sg.Popup('Successfully Scanned for Radios.', f'Found {total_radios} radios.',
+                             f'Number of New Radios: '
+                             f'{num_radios}', f'Current Radios: {names}', title='Scan for Radios')
                 else:
-                    sg.Popup('Successfully Scanned for Radios.', f'{len(RADIO_LIST)} Current Radios.\nNo New Radios Found',
-                         f'Current Radios: {names}', title='Scan for Radios')
+                    sg.Popup('Successfully Scanned for Radios.',
+                             f'{len(RADIO_LIST)} Current Radios.\nNo New Radios Found',
+                             f'Current Radios: {names}', title='Scan for Radios')
             except:
                 sg.Popup('Error No Coordinator Connected', title='Scan for Radios')
-
 
         # Popup for collect current data
         if event == 'collect':
@@ -345,7 +376,6 @@ def show_gui(parsed_data):
                 sg.Popup(f'Successfully Collected Current Data From {len(RADIO_LIST)} Radios.', f'Radio Names: {names}',
                          f'Raw Radio Data: {parsed_radio_data}', title='Current Data')
 
-
         # Popup for clear radio list internal use only
         if event == 'clear':
             clear_radio_list()
@@ -353,6 +383,13 @@ def show_gui(parsed_data):
         # Popup to set collection time
         if event == 'setup':
             sample_freq = sg.popup_get_text('Please enter a sampling frequency in minutes', title='Setup')
+            set_sampling_freq(sample_freq)
+
+        # Sets to start auto collecting data
+        if event == 'auto_collect':
+            if not thread.is_alive():
+                thread.start()
+
 
         # Popup for Soil Moisture
         if event == 'soil_m':
@@ -404,7 +441,15 @@ def main():
     # TODO make charts with matplotlib
 
     # Step 4: GUI
-    show_gui(parsed_data)
+    stop_threads = False
+    th = threading.Thread(target=(lambda x, y, z: background_collection(x, y, z)), args=(SAMPLE_RATE, lambda: stop_threads, test_background))
+    show_gui(parsed_data, th)
+    time.sleep(1)
+    stop_threads = True
+    if th.is_alive():
+        print('where all threads go to die')
+        th.join()
+
 
 
 if __name__ == '__main__':
