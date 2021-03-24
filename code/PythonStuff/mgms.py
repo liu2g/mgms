@@ -259,7 +259,7 @@ def parse_data(sensor_data):
     return sensor_data.split(',')
 
 
-def show_gui(parsed_data, thread):
+def show_gui(parsed_data, sensor1_data, sensor2_data, thread):
     # green theme for green project
     sg.theme('Green')
 
@@ -298,38 +298,37 @@ def show_gui(parsed_data, thread):
 
     # Buttons to close out of gui
     button_ok = sg.Column(
-        [[sg.Button('Close', font=('Arial', 12), pad=((0, 20), (10, 10)))]],
+        [[sg.Button('Close', font=('Arial', 12), pad=((0, 20), (0, 10)))]],
         element_justification='right', key='COL7')
 
     # Button Clears Radios...
     button_clear = sg.Column(
-        [[sg.Button('Clear', font=('Arial', 12), pad=((20, 0), (10, 10)), key='clear')]],
+        [[sg.Button('Clear', font=('Arial', 12), pad=((0, 0), (10, 10)), key='clear')]],
         element_justification='left', key='COL8')
 
     # Button to scan for radios
     button_scan = sg.Column(
-        [[sg.Button('Scan for Radios', font=('Arial', 12), pad=((20, 0), (10, 10)), key='scan')]],
+        [[sg.Button('Scan for Radios', font=('Arial', 12), pad=((0, 10), (10, 10)), key='scan')]],
         element_justification='left', key='COL5')
 
     # Button to collect data
     button_collect = sg.Column(
-        [[sg.Button('Collect Data', font=('Arial', 12), pad=((20, 0), (10, 10)), key='collect')]],
+        [[sg.Button('Collect Data', font=('Arial', 12), pad=((0, 0), (10, 10)), key='collect')]],
         element_justification='right', key='COL6')
 
     button_setup = sg.Column(
-        [[sg.Button('Setup', font=('Arial', 12), pad=((20, 0), (10, 10)), key='setup')]],
+        [[sg.Button('Setup', font=('Arial', 12), pad=((0, 0), (0, 10)), key='setup')]],
         element_justification='right', key='COL9')
 
     button_auto_collect = sg.Column(
-        [[sg.Button('Auto Collect', font=('Arial', 12), pad=((20, 0), (10, 10)), key='auto_collect')]],
+        [[sg.Button('Auto Collect', font=('Arial', 12), pad=((0, 0), (0, 10)), key='auto_collect')]],
         element_justification='right', key='COL10')
 
     # everything that shows up in the GUI
     layout = [[description],
               [data_types, sensor_data, data_buttons],
               [button_scan, button_collect],
-              [button_ok, button_setup],
-              [button_auto_collect]]
+              [button_ok, button_setup, button_auto_collect]]
 
     # create and open window
     window = sg.Window(layout=layout, title='Modular Garden Monitoring System', margins=(0, 0),
@@ -403,39 +402,147 @@ def show_gui(parsed_data, thread):
                 else:
                     sg.Popup('Auto Collection Error', title='Auto Collect Data')
 
-
         # Popup for Soil Moisture
         if event == 'soil_m':
-            popup_text = '[insert plot w/ matplotlib here]'
+            plt.close('all')
+            plot_sensor1 = []
+            plot_sensor2 = []
+            hours_ago = [-5.00, -4.75, -4.5, -4.25, -4.00, -3.75, -3.5, -3.25, -3.00, -2.75, -2.5, -2.25, -2.00, -1.75,
+                         -1.5, -1.25, -1.00, -0.75, -0.5, -0.25]
+            for i in range(20):
+                plot_sensor1.append(sensor1_data[i][1])
+                plot_sensor2.append(sensor2_data[i][1])
+            plt.plot(hours_ago, plot_sensor1, 'g', label="Sensor 1")
+            plt.plot(hours_ago, plot_sensor2, 'y', label="Sensor 2")
+            plt.title('Soil Moisture Plot - Past 5 Hours')
+            plt.xlabel('Time (Hours Ago)')
+            plt.ylabel('Soil Moisture (%)')
+            plt.xlim([-5, 0])
+            plt.ylim([0, 100])
+            plt.legend()
+            plt.show(block=False)
+            # popup_text = '[insert plot w/ matplotlib here]'
             # TODO add charts to popups in GUI
-            sg.Popup('This is a pop-up for Soil Moisture', popup_text, title='Soil Moisture')
+            # sg.Popup('This is a pop-up for Soil Moisture', popup_text, title='Soil Moisture')
 
         # Popup for Soil Temperature
         if event == 'soil_t':
-            popup_text = '[insert plot w/ matplotlib here]'
+            plt.close('all')
+            plot_sensor1 = []
+            plot_sensor2 = []
+            hours_ago = [-5.00, -4.75, -4.5, -4.25, -4.00, -3.75, -3.5, -3.25, -3.00, -2.75, -2.5, -2.25, -2.00, -1.75,
+                         -1.5, -1.25, -1.00, -0.75, -0.5, -0.25]
+            for i in range(20):
+                plot_sensor1.append(sensor1_data[i][0])
+                plot_sensor2.append(sensor2_data[i][0])
+            plt.plot(hours_ago, plot_sensor1, 'g', label="Sensor 1")
+            plt.plot(hours_ago, plot_sensor2, 'y', label="Sensor 2")
+            plt.title('Soil Temperature Plot - Past 5 Hours')
+            plt.xlabel('Time (Hours Ago)')
+            plt.ylabel('Soil Temperature (°F)')
+            plt.xlim([-5, 0])
+            plt.ylim([0, 100])
+            plt.legend()
+            plt.show(block=False)
+            # popup_text = '[insert plot w/ matplotlib here]'
             # TODO add charts to popups in GUI
-            sg.Popup('This is a pop-up for Soil Temperature', popup_text, title='Soil Temperature')
+            # sg.Popup('This is a pop-up for Soil Temperature', popup_text, title='Soil Temperature')
 
         # Popup for Air Humidity
         if event == 'air_m':
-            popup_text = '[insert plot w/ matplotlib here]'
+            plt.close('all')
+            plot_sensor1 = []
+            plot_sensor2 = []
+            hours_ago = [-5.00, -4.75, -4.5, -4.25, -4.00, -3.75, -3.5, -3.25, -3.00, -2.75, -2.5, -2.25, -2.00, -1.75,
+                         -1.5, -1.25, -1.00, -0.75, -0.5, -0.25]
+            for i in range(20):
+                plot_sensor1.append(sensor1_data[i][1])
+                plot_sensor2.append(sensor2_data[i][1])
+            plt.plot(hours_ago, plot_sensor1, 'g', label="Sensor 1")
+            plt.plot(hours_ago, plot_sensor2, 'y', label="Sensor 2")
+            plt.title('Air Humidity Plot - Past 5 Hours')
+            plt.xlabel('Time (Hours Ago)')
+            plt.ylabel('Air Humidity (%)')
+            plt.xlim([-5, 0])
+            plt.ylim([0, 100])
+            plt.legend()
+            plt.show(block=False)
+            # popup_text = '[insert plot w/ matplotlib here]'
             # TODO add charts to popups in GUI
-            sg.Popup('This is a pop-up for Air Humidity', popup_text, title='Air Humidity')
+            # sg.Popup('This is a pop-up for Air Humidity', popup_text, title='Air Humidity')
 
         # Popup for Air Temperature
         if event == 'air_t':
-            popup_text = '[insert plot w/ matplotlib here]'
+            plt.close('all')
+            plot_sensor1 = []
+            plot_sensor2 = []
+            hours_ago = [-5.00, -4.75, -4.5, -4.25, -4.00, -3.75, -3.5, -3.25, -3.00, -2.75, -2.5, -2.25, -2.00, -1.75,
+                         -1.5, -1.25, -1.00, -0.75, -0.5, -0.25]
+            for i in range(20):
+                plot_sensor1.append(sensor1_data[i][2])
+                plot_sensor2.append(sensor2_data[i][2])
+            plt.plot(hours_ago, plot_sensor1, 'g', label="Sensor 1")
+            plt.plot(hours_ago, plot_sensor2, 'y', label="Sensor 2")
+            plt.title('Air Temperature Plot - Past 5 Hours')
+            plt.xlabel('Time (Hours Ago)')
+            plt.ylabel('Air Temperature (°F)')
+            plt.xlim([-5, 0])
+            plt.ylim([0, 100])
+            plt.legend()
+            plt.show(block=False)
+            # popup_text = '[insert plot w/ matplotlib here]'
             # TODO add charts to popups in GUI
-            sg.Popup('This is a pop-up for Air Temperature', popup_text, title='Air Temperature')
+            # sg.Popup('This is a pop-up for Air Temperature', popup_text, title='Air Temperature')
 
         # Popup for Sunlight
         if event == 'sun':
-            popup_text = '[insert plot w/ matplotlib here]'
+            plt.close('all')
+            plot_sensor1 = []
+            plot_sensor2 = []
+            hours_ago = [-5.00, -4.75, -4.5, -4.25, -4.00, -3.75, -3.5, -3.25, -3.00, -2.75, -2.5, -2.25, -2.00, -1.75,
+                         -1.5, -1.25, -1.00, -0.75, -0.5, -0.25]
+            for i in range(20):
+                plot_sensor1.append(sensor1_data[i][4])
+                plot_sensor2.append(sensor2_data[i][4])
+            plt.plot(hours_ago, plot_sensor1, 'g', label="Sensor 1")
+            plt.plot(hours_ago, plot_sensor2, 'y', label="Sensor 2")
+            plt.title('Sunlight Plot - Past 5 Hours')
+            plt.xlabel('Time (Hours Ago)')
+            plt.ylabel('Sunlight (%)')
+            plt.xlim([-5, 0])
+            plt.ylim([0, 100])
+            plt.legend()
+            plt.show()
+            # popup_text = '[insert plot w/ matplotlib here]'
             # TODO add charts to popups in GUI
-            sg.Popup('This is a pop-up for Sunlight', popup_text, title='Sunlight')
+            # sg.Popup('This is a pop-up for Sunlight', popup_text, title='Sunlight')
 
     # closes window
     window.close()
+
+
+# Load given TXT file
+def load_file(filename):
+    # Reads data from .txt file
+    text_file = open(filename, 'r')
+    lines = text_file.read().splitlines()
+    text_file.close()
+
+    # Creates new empty list
+    file_contents = []  # list values in form of: [P, N, Stressed]
+
+    # Saves "Not Stressed" values into "studyResults" List
+    for j in range(0, 20):
+        if ";" in lines[j]:
+            new_line = lines[j].split(';')
+        else:
+            new_line = lines[j].split()
+        file_contents.append(new_line)
+
+    # Converts all string values in "studyResults" to float
+    file_contents = [list(map(float, sublist)) for sublist in file_contents]
+
+    return file_contents
 
 
 # Main Function - Start Here
@@ -447,22 +554,27 @@ def main():
     # Step 2: Parse Collected Data
     # Alan has data format ready
     # dummy data since i don't have the radio
-    sensor_data = "12,34,46,78,90"
+    # <soil-temp>;<soil-moist>;<air-temp>;<air-hum>;<sunlight> 58;56;69;43;27
+    sensor_data = "56,58,43,69,27"
     parsed_data = parse_data(sensor_data)
 
     # Step 3: Visualize Data
     # TODO make charts with matplotlib
+    # Read contents of 'HW2_data.txt'
+    sensor1 = load_file('code\PythonStuff\sensor1.txt')
+    sensor2 = load_file('code\PythonStuff\sensor2.txt')
+    # print(len(sensor1))
+    # print(len(sensor2))
 
     # Step 4: GUI
     stop_threads = False
     th = threading.Thread(target=(lambda x, y, z: background_collection(x, y, z)), args=(SAMPLE_RATE, lambda: stop_threads, test_background))
-    show_gui(parsed_data, th)
+    show_gui(parsed_data, sensor1, sensor2, th)
     time.sleep(1)
     stop_threads = True
     if th.is_alive():
         print('where all threads go to die')
         th.join()
-
 
 
 if __name__ == '__main__':
