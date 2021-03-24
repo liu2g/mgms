@@ -18,7 +18,7 @@ import threading
 RADIO_LIST = []
 RADIO_DATA_PULL = []
 PARSED_RADIO_DATA = []
-SAMPLE_RATE = 15
+SAMPLE_RATE = 120
 
 
 # TODO: radio struct? updated with get radios that contains radios name, location, DH, DL, etc.
@@ -235,10 +235,17 @@ def background_collection(delay, stop, task):
 
 
 def test_background():
-    print("test time:", time.asctime(time.localtime(time.time())))
+    #todo
+    print("sampling time:", time.asctime(time.localtime(time.time())))
+    data = sample_radios('COM4')
+    names = get_radio_names()
+    parsed_radio_data = parse_radio_data(data)
+    store_parsed_data(parsed_radio_data)
+
 
 
 def store_parsed_data(data):
+    #TODO
     return
 
 
@@ -387,8 +394,14 @@ def show_gui(parsed_data, thread):
 
         # Sets to start auto collecting data
         if event == 'auto_collect':
-            if not thread.is_alive():
-                thread.start()
+            if len(RADIO_LIST) == 0:
+                sg.Popup('No Connected Radios.\nPlease Scan for Radios', title='Auto Collect Data')
+            else:
+                if not thread.is_alive():
+                    thread.start()
+                    sg.Popup(f'Collecting Data Every {SAMPLE_RATE} Seconds', title='Auto Collect Data')
+                else:
+                    sg.Popup('Auto Collection Error', title='Auto Collect Data')
 
 
         # Popup for Soil Moisture
