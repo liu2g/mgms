@@ -125,7 +125,7 @@ def scan_for_radios(serial_port):
     # response
     # print('trying to get radio list')
     response = ser.read_until(b'\r\r\r')
-    print('data from radio {}'.format(response))
+    #print('data from radio {}'.format(response))
     radio_data = response
 
     # closes command mode
@@ -186,7 +186,7 @@ def sample_radios(serial_port):
             time.sleep(1.5)
             # line = ser.readline()
             line = ser.read_until(b'\r\r', size=None)
-            print('data from radio {}'.format(line))  # debugging line
+            #print('data from radio {}'.format(line))  # debugging line
             radio_data = line
             temp_arr = []
             temp_arr.append(each.NI)
