@@ -1,4 +1,4 @@
-Source code for the integrated sensor module for the project, developed by Alan.
+Source code for the integrated sensor module for the project, developed by Alan and Liu.
 
 # Supported Hardware
 

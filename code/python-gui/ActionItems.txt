@@ -1,7 +1,0 @@
-Dummy data 
-	Scanned data parsed
-	Scanned data stored 
-UI - scan button
-graphs historical data
-current scan data
-port to PI
