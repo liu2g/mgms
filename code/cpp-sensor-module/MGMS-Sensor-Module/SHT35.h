@@ -1,8 +1,8 @@
 /*
  * SHT35.h
  * Custom Library Supporting SHT35 Sensor  - Adapted from Adafruit Library
- * Zuguang Liu liu2z2@mail.uc.edu ; Alan Trester tresteat@mail.uc.edu 
- */ 
+ * Zuguang Liu liu2z2@mail.uc.edu ; Alan Trester tresteat@mail.uc.edu
+ */
 
 
 #ifndef SHT35_H_
@@ -60,6 +60,7 @@
 ret_code_t SHT_init() ;
 //ret_code_t SHT_measure(uint16_t* temp, uint16_t* hum) ;
 //ret_code_t SHT_check(uint16_t* status) ;
-void UpdateTempHumid(float* RealTemp, char* TempASCII, float* RealHumid, char* HumidASCII) ;
+void UpdateTempHumid(float* RealTemp, char* TempASCII, float* RealHumid,
+                     char* HumidASCII) ;
 
 #endif /* SHT35_H_ */
