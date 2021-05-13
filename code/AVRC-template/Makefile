@@ -17,7 +17,7 @@ FUSES      = -U lfuse:w:0x62:m -U hfuse:w:0xD9:m -U efuse:w:0xFF:m -U lock:w:0xF
 ifdef verbose
 VERB = -v
 else
-VERB = 
+VERB =
 endif
 
 AVRDUDE = avrdude -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) $(VERB)
@@ -29,7 +29,7 @@ OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
 
 # High level rules
 
-help: 
+help:
 	@echo "all         Build main.c, leaves main.o, main.elf and main.hex here"
 	@echo "clean       Remove built files such as main.o, main.elf and main.hex"
 	@echo "flash       Build source and flashes to AVR chip, then removes the built files"
@@ -49,13 +49,13 @@ flash:
 	$(MAKE) build
 	@echo "==========FLASHING=========="
 	$(AVRDUDE) -U flash:w:main.hex:i
-	
+
 flashrm:	flash
 	$(MAKE) clean
 
 
 # Step-by-step rules
-build: 
+build:
 	@echo "==========BUILDING=========="
 	$(MAKE) all
 

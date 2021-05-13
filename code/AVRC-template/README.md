@@ -56,4 +56,4 @@ sudo apt install libusb-dev
 
 ### On Windows
 
-On Windows, driver needs to be installed separately. This is available at https://github.com/adafruit/Adafruit_Windows_Drivers/releases. After installation, there should be an entry called "LibUSB-Win32 Devices / USBtinyISP AVR Programmer" in Device manager. 
+On Windows, driver needs to be installed separately. This is available at https://github.com/adafruit/Adafruit_Windows_Drivers/releases. After installation, there should be an entry called "LibUSB-Win32 Devices / USBtinyISP AVR Programmer" in Device manager.
