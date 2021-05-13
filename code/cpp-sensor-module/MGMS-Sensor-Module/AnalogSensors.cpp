@@ -1,7 +1,7 @@
 /*
  * AnalogSensors.cpp
  * Custom Library Supporting ADC Reads for Soil Temp, Soil Moisture, Sunlight
- * Alan Trester tresteat@mail.uc.edu ; Zuguang Liu liu2z2@mail.uc.edu
+ * Alan Trester <tresteat@mail.uc.edu> ; Zuguang Liu <liu2z2@mail.uc.edu>
  * 3/14/2021
  */
 

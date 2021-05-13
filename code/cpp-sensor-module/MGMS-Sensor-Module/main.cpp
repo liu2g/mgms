@@ -1,6 +1,7 @@
  //////////////////////////////////////////////////////////////////////////////
- //    MGMS Sensor Module main.cpp Alan Trester, tresteat@mail.uc.edu ; Zuguang
- //    Liu liu2z2@mail.uc.edu March 14, 2021
+ //    MGMS Sensor Module main.cpp
+ //    Alan Trester <tresteat@mail.uc.edu> ; Zuguang Liu <liu2z2@mail.uc.edu>
+ //    March 14, 2021
  //////////////////////////////////////////////////////////////////////////////
 
 #include <avr/io.h>

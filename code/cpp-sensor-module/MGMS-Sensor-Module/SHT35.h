@@ -1,7 +1,7 @@
 /*
  * SHT35.h
  * Custom Library Supporting SHT35 Sensor  - Adapted from Adafruit Library
- * Zuguang Liu liu2z2@mail.uc.edu ; Alan Trester tresteat@mail.uc.edu
+ * Zuguang Liu <liu2z2@mail.uc.edu> ; Alan Trester <tresteat@mail.uc.edu>
  */
 
 
