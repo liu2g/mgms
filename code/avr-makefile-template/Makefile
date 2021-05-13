@@ -21,16 +21,16 @@ VERB =
 endif
 
 AVRDUDE = avrdude -p $(DEVICE) -c $(PROGRAMMER) -P $(PORT) $(VERB)
-COMPILE = avr-gcc -std=gnu99 -Wall -Os -ffunction-sections -fdata-sections -mmcu=$(DEVICE) -DF_CPU=$(CLOCK) $(VERB)
+CXX = avr-g++ -Wall -Os -ffunction-sections -fdata-sections -mmcu=$(DEVICE) -DF_CPU=$(CLOCK) $(VERB)
 
 # Generate lookup table in project directory
-SOURCES = $(wildcard *.c)
-OBJECTS = $(patsubst %.c, %.o, $(SOURCES))
+SOURCES = $(wildcard *.cpp)
+OBJECTS = $(patsubst %.cpp, %.o, $(SOURCES))
 
 # High level rules
 
 help:
-	@echo "all         Build main.c, leaves main.o, main.elf and main.hex here"
+	@echo "all         Build main.cpp, leaves main.o, main.elf and main.hex here"
 	@echo "clean       Remove built files such as main.o, main.elf and main.hex"
 	@echo "flash       Build source and flashes to AVR chip, then removes the built files"
 	@echo "flashrm    Build source and flashes to AVR chip, but leaves all the files here"
@@ -68,12 +68,12 @@ all:	main.hex
 
 %.o: %.c
 	@echo "----------compile----------"
-	$(COMPILE) -c $< -o $@
+	$(CXX) -c $< -o $@
 
 
 main.elf: $(OBJECTS)
 	@echo "----------link objects----------"
-	$(COMPILE) -Wl,--gc-sections $(OBJECTS) -o main.elf 
+	$(CXX) -Wl,--gc-sections $(OBJECTS) -o main.elf
 
 main.hex: main.elf
 	@echo "----------generate bin----------"
@@ -85,4 +85,4 @@ disasm:	main.elf
 	avr-objdump -d main.elf
 
 cpp:
-	$(COMPILE) -E main.c
+	$(CXX) -E main.cpp
