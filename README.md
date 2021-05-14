@@ -30,8 +30,9 @@ TODO
   - [x] C++ backend
   - [x] Python frontend
 - [ ] Properly include circuit design
+  - [x] Include Native Altium files
   - [ ] Document by README
-  - [ ] Check KiCAD compatibility
+  - [x] Check KiCAD compatibility
 - [ ] Include documents
   - [ ] LaTeX documents (.tex and .pdf)
   - [ ] Datasheets

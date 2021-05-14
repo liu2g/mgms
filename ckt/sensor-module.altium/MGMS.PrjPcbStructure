@@ -1,0 +1,3 @@
+Record=TopLevelDocument|FileName=Circuit.SchDoc|SheetNumber=1
+Record=SheetSymbol|SourceDocument=Circuit.SchDoc|Designator=NC|SchDesignator=NC|FileName=No_Connects.SchDoc|SheetNumber=2|SymbolType=Normal|RawFileName=No_Connects.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=Circuit.SchDoc|Designator=PWR|SchDesignator=PWR|FileName=PWR_GND.SchDoc|SheetNumber=3|SymbolType=Normal|RawFileName=PWR_GND.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
