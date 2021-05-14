@@ -24,3 +24,16 @@ DHF (Design History File) is located under `Docs/DHF/DHF-main.pdf`
 ## Lecture files
 
 Contains documents that are downloaded on Canvas. See `LectureFiles/`.
+
+TODO
+- [x] Clean up and document code
+  - [x] C++ backend
+  - [x] Python frontend
+- [ ] Properly include circuit design
+  - [ ] Document by README
+  - [ ] Check KiCAD compatibility
+- [ ] Include documents
+  - [ ] LaTeX documents (.tex and .pdf)
+  - [ ] Datasheets
+  - [ ] Remove lecture files
+- [ ] Update main README
