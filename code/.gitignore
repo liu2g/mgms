@@ -4,8 +4,7 @@
 # Dolphin settings
 .directory
 *.zip
-**/.vscode/
-**/.idea/
+
 
 ###############################################################################
 # Python gitignore

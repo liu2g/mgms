@@ -10,10 +10,11 @@
 import time
 import traceback
 import threading
+from pathlib import Path
 import matplotlib.pyplot as plt
 import serial
 import PySimpleGUI as sg
-from pathlib import Path
+
 
 
 RADIO_LIST = []
