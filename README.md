@@ -35,6 +35,5 @@ TODO
   - [x] Check KiCAD compatibility
 - [ ] Include documents
   - [ ] LaTeX documents (.tex and .pdf)
-  - [ ] Datasheets
-  - [ ] Remove lecture files
+  - [x] Remove lecture files
 - [ ] Update main README
