@@ -283,9 +283,9 @@ def show_gui(parsed_data, sensor1_data, sensor2_data, thread):
     # Current sensor values shown in the Right Body of the GUI
     sensor_data = sg.Column(
         [[sg.Text(f'{parsed_data[0]} %', font=('Arial Rounded MT Bold', 12))],
-         [sg.Text(f'{parsed_data[1]} °F', font=('Arial Rounded MT Bold', 12))],
+         [sg.Text(f'{parsed_data[1]}'+u'\N{DEGREE SIGN}F', font=('Arial Rounded MT Bold', 12))],
          [sg.Text(f'{parsed_data[2]} %', font=('Arial Rounded MT Bold', 12))],
-         [sg.Text(f'{parsed_data[3]} °F', font=('Arial Rounded MT Bold', 12))],
+         [sg.Text(f'{parsed_data[3]}'+u'\N{DEGREE SIGN}F', font=('Arial Rounded MT Bold', 12))],
          [sg.Text(f'{parsed_data[4]} %', font=('Arial Rounded MT Bold', 12))]],
         element_justification='left',
         key='COL3')
@@ -503,7 +503,7 @@ def show_gui(parsed_data, sensor1_data, sensor2_data, thread):
             plt.plot(hours_ago, plot_sensor2, 'y', label="Sensor 2")
             plt.title('Soil Temperature Plot - Past 5 Hours')
             plt.xlabel('Time (Hours Ago)')
-            plt.ylabel('Soil Temperature (°F)')
+            plt.ylabel(u'Soil Temperature (\N{DEGREE SIGN}F)')
             plt.xlim([-5, 0])
             plt.ylim([0, 100])
             plt.legend()
@@ -557,7 +557,7 @@ def show_gui(parsed_data, sensor1_data, sensor2_data, thread):
             plt.plot(hours_ago, plot_sensor2, 'y', label="Sensor 2")
             plt.title('Air Temperature Plot - Past 5 Hours')
             plt.xlabel('Time (Hours Ago)')
-            plt.ylabel('Air Temperature (°F)')
+            plt.ylabel(u'Air Temperature (\N{DEGREE SIGN}F)')
             plt.xlim([-5, 0])
             plt.ylim([0, 100])
             plt.legend()

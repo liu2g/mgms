@@ -1,0 +1,66 @@
+\ganttset{calendar week text={\currentweek}} % set gantt scaling
+% change page size and margin
+\clearpage
+\KOMAoptions{paper=a3, paper=landscape}
+\addtolength{\hoffset}{-4.0cm}
+\recalctypearea
+\thispagestyle{empty}
+
+\section{Timeline}
+
+\vspace{50pt}
+
+\begin{ganttchart}[
+        % Gantt chart configuration
+        bar/.style={fill=gray!50, draw},
+        bar incomplete/.style={/pgfgantt/bar, fill=white}, % greyscale
+        x unit=1.2mm, % suitable width for a3
+        y unit chart=0.6cm, % smaller line spacing
+        time slot format=isodate, time slot unit=day, % set gantt scaling
+        progress=today, today={2021-04-06}, % auto-calculate progress
+    ]{2020-08-24}{2021-04-29} % start of fall 2020 to end of fall 2021
+    \gantttitlecalendar{year, month=shortname} \\ % title config
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %                   Edit here to update tasks                      %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Format:
+    % \gantbar{task-name}{startyear-month-day}{endyear-month-day} \\
+
+    % No need to input progress, it calculates progress when built ヽ( •_)ᕗ
+    % Don't forget to new line at the end!
+    \ganttgroup{Definition}{2020-08-24}{2020-09-27} \\
+    \ganttbar{Rough system diagram}{2020-08-24}{2020-09-18} \\
+    \ganttbar{Final preliminary system design}{2020-09-18}{2020-09-27} \\
+    \ganttbar{Bill of Material}{2020-09-18}{2020-09-27} \\
+
+    \ganttgroup{Design}{2020-09-27}{2020-12-31} \\
+    \ganttbar{Order parts}{2020-09-27}{2020-11-15} \\
+    \ganttbar{Firmware development}{2020-09-27}{2021-1-31} \\
+    \ganttbar{Front end development}{2020-12-15}{2021-2-15} \\
+    \ganttbar{Control system development}{2020-12-15}{2021-2-15} \\
+    \ganttbar{Additional hardware}{2020-12-15}{2020-12-31} \\
+
+    \ganttgroup{Implementation}{2020-11-01}{2021-2-28} \\
+    \ganttbar{Finalize and order PCB}{2021-2-1}{2021-2-28} \\
+    \ganttbar{System Prototype}{2021-2-1}{2021-3-15} \\
+    \ganttbar{System assembly}{2021-2-15}{2021-3-15} \\
+    \ganttbar{Finalize UI}{2021-2-15}{2021-3-15} \\
+
+    \ganttgroup{Testing}{2021-02-28}{2021-03-25} \\
+    \ganttbar{Test UI}{2021-2-28}{2021-3-25} \\
+    \ganttbar{Test Hardware}{2021-2-28}{2021-3-25}\\
+    \ganttbar{System Testing}{2021-03-01}{2021-3-25}\\
+
+    \ganttgroup{Delivery}{2021-03-12}{2021-04-5} \\
+    \ganttbar{Poster}{2021-03-14}{2021-03-20}\\
+    \ganttbar{Abstract}{2021-03-16}{2021-03-23}\\
+    \ganttbar{Video Presentation}{2021-03-19}{2021-03-25}\\
+    \ganttbar{Design Expo}{2021-4-5}{2021-4-11}\\
+
+
+
+
+
+
+
+\end{ganttchart}

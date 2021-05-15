@@ -10,45 +10,45 @@
 The team plans to meet weekly using the Microsoft Teams videoconferencing application. This weekly meeting will occur every Tuesday for approximately 30 minutes starting at 3:30pm, and the work itself will be documented and shared using Teams and GitHub. The scheduled timeline is illustrated in a Gantt chart shown below. Tasks regarding the Implementation, Testing and Delivery phases are not reduced in detail as they depend on the result of the Design phase. \\
 
 \begin{ganttchart}[
-		% Gantt chart configuration
-		bar/.style={fill=gray!50, draw},
-		bar incomplete/.style={/pgfgantt/bar, fill=white}, % greyscale
-		x unit=1.2mm, % suitable width for a3
-		y unit chart=0.6cm, % smaller line spacing
-		time slot format=isodate, time slot unit=day, % set gantt scaling
-		progress=today, today={2020-09-24}, % auto-calculate progress
-	]{2020-08-24}{2021-04-29} % start of fall 2020 to end of fall 2021
-	\gantttitlecalendar{year, month=shortname} \\ % title config
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	%                   Edit here to update tasks                      %
-	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	% Format:
-	% \gantbar{task-name}{startyear-month-day}{endyear-month-day} \\
+        % Gantt chart configuration
+        bar/.style={fill=gray!50, draw},
+        bar incomplete/.style={/pgfgantt/bar, fill=white}, % greyscale
+        x unit=1.2mm, % suitable width for a3
+        y unit chart=0.6cm, % smaller line spacing
+        time slot format=isodate, time slot unit=day, % set gantt scaling
+        progress=today, today={2020-09-24}, % auto-calculate progress
+    ]{2020-08-24}{2021-04-29} % start of fall 2020 to end of fall 2021
+    \gantttitlecalendar{year, month=shortname} \\ % title config
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %                   Edit here to update tasks                      %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Format:
+    % \gantbar{task-name}{startyear-month-day}{endyear-month-day} \\
 
-	% No need to input progress, it calculates progress when built ヽ( •_)ᕗ
-	% Don't forget to new line at the end!
-	\ganttgroup{Definition}{2020-08-24}{2020-09-27} \\
-	\ganttbar{Rough system diagram}{2020-08-24}{2020-09-18} \\
-	\ganttbar{Final preliminary system design}{2020-09-18}{2020-09-27} \\
-	\ganttbar{Bill of Material}{2020-09-18}{2020-09-27} \\
+    % No need to input progress, it calculates progress when built ヽ( •_)ᕗ
+    % Don't forget to new line at the end!
+    \ganttgroup{Definition}{2020-08-24}{2020-09-27} \\
+    \ganttbar{Rough system diagram}{2020-08-24}{2020-09-18} \\
+    \ganttbar{Final preliminary system design}{2020-09-18}{2020-09-27} \\
+    \ganttbar{Bill of Material}{2020-09-18}{2020-09-27} \\
 
-	\ganttgroup{Design}{2020-09-27}{2020-11-15} \\
-	\ganttbar{Order parts}{2020-09-27}{2020-11-15} \\
-	\ganttbar{Front end development}{2020-09-27}{2020-11-08} \\
-	\ganttbar{Firmware development}{2020-09-27}{2020-11-08} \\
-	\ganttbar{Control system development}{2020-09-27}{2020-11-15} \\
-	\ganttbar{System Prototype}{2020-11-01}{2020-11-15} \\
-	\ganttbar{Additional hardware}{2020-10-15}{2020-11-01} \\
+    \ganttgroup{Design}{2020-09-27}{2020-11-15} \\
+    \ganttbar{Order parts}{2020-09-27}{2020-11-15} \\
+    \ganttbar{Front end development}{2020-09-27}{2020-11-08} \\
+    \ganttbar{Firmware development}{2020-09-27}{2020-11-08} \\
+    \ganttbar{Control system development}{2020-09-27}{2020-11-15} \\
+    \ganttbar{System Prototype}{2020-11-01}{2020-11-15} \\
+    \ganttbar{Additional hardware}{2020-10-15}{2020-11-01} \\
 
-	\ganttgroup{Implementation}{2020-11-01}{2020-12-31} \\
-	%\ganttbar{Finalize UI}{}{}
-	%\ganttbar{Finalize and order PCB}{}{}
-	%\ganttbar{System assembly}{}{}
+    \ganttgroup{Implementation}{2020-11-01}{2020-12-31} \\
+    %\ganttbar{Finalize UI}{}{}
+    %\ganttbar{Finalize and order PCB}{}{}
+    %\ganttbar{System assembly}{}{}
 
-	\ganttgroup{Testing}{2021-01-01}{2021-02-28} \\
+    \ganttgroup{Testing}{2021-01-01}{2021-02-28} \\
 
 
-	\ganttgroup{Delivery}{2021-03-01}{2021-04-29} \\
+    \ganttgroup{Delivery}{2021-03-01}{2021-04-29} \\
 
 
 
@@ -64,8 +64,8 @@ The team plans to meet weekly using the Microsoft Teams videoconferencing applic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vfill
 \begin{center}
-	\hspace{5.0cm}
-	\thepage
+    \hspace{5.0cm}
+    \thepage
 \end{center}
 
 
