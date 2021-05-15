@@ -1,0 +1,83 @@
+\ganttset{calendar week text={\currentweek}} % set gantt scaling
+% change page size and margin
+\clearpage
+\KOMAoptions{paper=a3, paper=landscape}
+\addtolength{\hoffset}{-3.0cm}
+\recalctypearea
+\thispagestyle{empty}
+% Chapter and Section
+\chapter{Project Timeline}
+\section{Gantt Chart}
+% \subsection*{Implementation}
+% \subsubsection*{Time}
+The team plans to meet weekly using the Microsoft Teams video conferencing application. This weekly meeting will occur every Tuesday for approximately 30 minutes starting at 3:30pm, and the work itself will be documented and shared using Teams and GitHub. The scheduled timeline is illustrated in a Gantt chart shown below. Tasks regarding the Implementation, Testing and Delivery phases are not reduced in detail as they depend on the result of the Design phase. \\
+
+\begin{figure}[H]
+    \begin{ganttchart}[
+            % Gantt chart configuration
+            bar/.style={fill=gray!50, draw},
+            bar incomplete/.style={/pgfgantt/bar, fill=white}, % greyscale
+            x unit=1.2mm, % suitable width for a3
+            y unit chart=0.6cm, % smaller line spacing
+            time slot format=isodate, time slot unit=day, % set gantt scaling
+            progress=today, today={2020-10-20}, % auto-calculate progress
+        ]{2020-08-24}{2021-04-29} % start of fall 2020 to end of fall 2021
+        \gantttitlecalendar{year, month=shortname} \\ % title config
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        %                   Edit here to update tasks                      %
+        %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+        % Format:
+        % \gantbar{task-name}{startyear-month-day}{endyear-month-day} \\
+
+        % No need to input progress, it calculates progress when built ヽ( •_)ᕗ
+        % Don't forget to new line at the end!
+        \ganttgroup{Definition}{2020-08-24}{2020-09-27} \\
+        \ganttbar{Rough system diagram}{2020-08-24}{2020-09-18} \\
+        \ganttbar{Final preliminary system design}{2020-09-18}{2020-09-27} \\
+        \ganttbar{Bill of Material}{2020-09-18}{2020-09-27} \\
+
+        \ganttgroup{Design}{2020-09-27}{2020-11-15} \\
+        \ganttbar{Order parts}{2020-09-27}{2020-11-15} \\
+        \ganttbar{Front end development}{2020-09-27}{2020-11-08} \\
+        \ganttbar{Firmware development}{2020-09-27}{2020-11-08} \\
+        \ganttbar{Control system development}{2020-09-27}{2020-11-15} \\
+        \ganttbar{System Prototype}{2020-11-01}{2020-11-15} \\
+        \ganttbar{Additional hardware}{2020-10-15}{2020-11-01} \\
+
+        \ganttgroup{Implementation}{2020-11-01}{2020-12-31} \\
+        %\ganttbar{Finalize UI}{}{}
+        %\ganttbar{Finalize and order PCB}{}{}
+        %\ganttbar{System assembly}{}{}
+
+        \ganttgroup{Testing}{2021-01-01}{2021-02-28} \\
+
+
+        \ganttgroup{Delivery}{2021-03-01}{2021-04-29} \\
+
+
+
+
+
+
+
+
+
+    \end{ganttchart}
+    \caption{Gantt chart that describes the projected timeline. Overall timeline is broken down into \textit{Definition}, \textit{Design}, \textit{Implementation}, \textit{Testing} and \textit{Delivery} phases with tasks. The current stage is in design as of today (\today), so the later phases are not described in detail. The expected delivery deadline is the date of senior design expo 2021.}
+    \label{fig:gantt}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                       Gantt Chart Ends                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \vfill
+% \begin{center}
+%     \thepage
+% \end{center}
+
+% restore page size and margin
+\newpage
+\clearpage
+\KOMAoptions{paper=a4, paper=portrait}
+\recalctypearea
+\addtolength{\hoffset}{+3.0cm}
+\pagestyle{plain}

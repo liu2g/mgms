@@ -1,0 +1,51 @@
+% Just so you guys know I'm too good to make this doable in LaTex --Liu
+\begin{tikzpicture}
+% Axes
+    \draw [thick, dashed] (-0.5\linewidth,0) -- (0.5\linewidth,0);
+    \draw [thick, dashed] (0,-0.5\linewidth) -- (0,0.5\linewidth);
+    \draw [thick, ->] (-0.5\linewidth,-0.5\linewidth) -- (-0.5\linewidth,0.5\linewidth);
+    \draw [thick, ->] (-0.5\linewidth,-0.5\linewidth) -- (0.5\linewidth,-0.5\linewidth);
+% Labels
+    \node [below right] at (-0.5\linewidth,-0.5\linewidth) {Low};
+    \node [above right, rotate=90] at (-0.5\linewidth,-0.5\linewidth) {Low};
+    \node [below] at (0.5\linewidth,-0.5\linewidth) {High};
+    \node [above left, rotate=90] at (-0.5\linewidth,0.5\linewidth) {High};
+    \node at (0,-10-0.5\linewidth) {\Large \bfseries Effort};
+    \node [rotate=90] at (-10-0.5\linewidth,0) {\Large \bfseries Impact};
+% Content
+    % Upper right
+    \node [draw, text width=0.4\linewidth, minimum size=0.4\linewidth] at (0.25\linewidth, 0.25\linewidth) {
+    \textbf{To meet the design requirements and goals}
+    \begin{itemize}[label=$\ast$, wide]
+        \item Measurement accuracy
+        \item UI accessibility
+        \item Modularity
+        \item ...
+    \end{itemize}
+    };
+    % Upper left
+    \node [draw, text width=0.4\linewidth, minimum size=0.4\linewidth] at (-0.25\linewidth, 0.25\linewidth) {
+    \textbf{To keep good documents and communications}
+    \begin{itemize}[label=$\ast$, wide]
+        \item Documenting design process
+        \item Following industry standards
+        \item Keeping advisor and Dr. Purdy updated
+    \end{itemize}
+    };
+    % Lower left
+    \node [draw, text width=0.4\linewidth, minimum size=0.4\linewidth] at (-0.25\linewidth, -0.25\linewidth) {
+    \textbf{To implement ``good-to-have'' features}
+    \begin{itemize}[label=$\ast$, wide]
+        \item Self charging by solar panel
+        \item Integration with smart home systems
+        \item Vegetation database
+    \end{itemize}
+    };
+    \node [draw, text width=0.4\linewidth, minimum size=0.4\linewidth] at (0.25\linewidth, -0.25\linewidth) {
+    \textbf{To implement out-of-scope features}
+    \begin{itemize}[label=$\ast$, wide]
+        \item Large-scale greenhouse capability
+        \item Advanced AI-based control algorithms
+    \end{itemize}
+    };
+\end{tikzpicture}
