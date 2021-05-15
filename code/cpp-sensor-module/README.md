@@ -26,12 +26,16 @@ Simply use this directory as a project in the IDE so that it can be built.
 
 Flashing the MCU may need extra setup depending on the programmer chip ([for example](https://www.asensar.com/guide/arduino_atemlstudio/integrate-avrdude-with-atmel-studio.html)).
 
-# With GNU Make
+## With GNU Make
 The same [`Makefile`](../make-avr-template/Makefile) was attached along with sources. Follow [this guide](../make-avr-template/README.md) on how to use it.
 
----
-**NOTE:**
+**NOTE:** Only build was tested. Runtime behavior on the actual hardware was not test for this solution.
 
-Only build was tested. Runtime behavior on the actual hardware was not test for this solution.
 
----
+# Why We Didn't Use Arduino and Downloadable Libraries
+We were well aware that with the selected hardware, it is easy to use libraries provided by Arduino and breakout-board vendors for the solution.
+However, we (mostly Alan and Liu) decided to not use them for multiple reasons.
+
+1. We would like to practice and demonstrate our C/C++ programming skill via this project.
+2. We find it easier to think in hardware with minimal software dependencies.
+3. We believe minimal library dependencies offer high portability to many more platforms, as well as high expandability to more advanced features.
