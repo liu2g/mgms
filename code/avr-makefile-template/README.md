@@ -1,4 +1,4 @@
-A simple template I made to compile and flash the AVR chip, by Liu
+A simple template I made to compile and flash the AVR chip, by Liu.
 
 ## Usage
 
@@ -19,7 +19,10 @@ A simple template I made to compile and flash the AVR chip, by Liu
 
 ## Dependencies
 
-The required program is `avr-gcc` toolchain and `avrdude`. They have availability and the same interface on both Linux and Windows. To check if they are install, in a terminal, run
+The required program is `avr-gcc` toolchain and `avrdude`.
+They have availability and the same interface on both Linux and Windows.
+To check if they are install, in a terminal, run
+
 ```
 avr-gcc -v
 avr-objcopy -V
@@ -27,11 +30,12 @@ make -v
 avrdude
 ```
 
-one line after the other. Basic help info will be printed If all tools are installed. 
+one line after the other. Basic help info will be printed If all tools are installed.
 
 ### On Linux
 
-Installing the tools on Linux are well explained in many articles. On Ubuntu/Debian, they are  available to install with `apt`, so simply run
+Installing the tools on Linux are well explained from many sources.
+On Ubuntu/Debian, they are  available to install with `apt`, so simply run
 
 ```bash
 sudo apt install gcc build-essential gcc-avr binutils-avr gdb-avr avr-libc avrdude
@@ -39,16 +43,20 @@ sudo apt install gcc build-essential gcc-avr binutils-avr gdb-avr avr-libc avrdu
 
 ### On Windows
 
-The tools are bundled in a suite "WinAVR". This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/. Run the exe installer then all tools should be installed and available with a new terminal.
+The tools are bundled in a suite "WinAVR".
+This is available to download at http://winavr.sourceforge.net/ or https://sourceforge.net/projects/winavr/files/.
+Run the exe installer then all tools should be installed and available with a new terminal.
 
-In addition, the `clean` command uses `rm` that is not available on Windows. You can use Cygwin shell by downloading [here](https://www.cygwin.com/) or it's bundled with Git Bash from [Git on Windows](https://git-scm.com/download/win). Currently these are only two workarounds.
+In addition, the `clean` command uses `rm` that is not available on Windows.
+You can use Cygwin shell by downloading [here](https://www.cygwin.com/) or it's bundled with Git Bash from [Git on Windows](https://git-scm.com/download/win). Currently these are only two workarounds.
 
 
 ## USBTiny Driver
 
 ### On Linux
 
-Driver for USBTiny is not required on Linux. However, to work with `avrdude`, a USB package called `libusb` is needed. To install this on Ubuntu/Debian, use `apt`:
+Driver for USBTiny is not required on Linux. However, to work with `avrdude`, a USB package called `libusb` is needed.
+To install this on Ubuntu/Debian, use `apt`:
 
 ```bash
 sudo apt install libusb-dev
@@ -56,4 +64,5 @@ sudo apt install libusb-dev
 
 ### On Windows
 
-On Windows, driver needs to be installed separately. This is available at https://github.com/adafruit/Adafruit_Windows_Drivers/releases. After installation, there should be an entry called "LibUSB-Win32 Devices / USBtinyISP AVR Programmer" in Device manager.
+On Windows, driver needs to be installed separately. This is available at https://github.com/adafruit/Adafruit_Windows_Drivers/releases.
+After installation, there should be an entry called "LibUSB-Win32 Devices / USBtinyISP AVR Programmer" in Device manager.
