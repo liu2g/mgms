@@ -1,8 +1,8 @@
 Source code for the GUI front-end for the project, developed by Sadie and Eric.
 
-<img src="img/gui-main.png" height="300">
-
-<img src="img/gui-graph.png" height="300">
+Landing Page | Sensor vs Time Graph
+:---: | :---:
+![](img/gui-main.png) | ![](img/gui-graph.png)
 
 # Dependencies
 The source was developed on Windows with Python 3.8.
