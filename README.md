@@ -1,39 +1,19 @@
-# Senior Design
-This is the repo for senior design of Sadie Gladden (gladdesm@mail.uc.edu), Alan Trester (tresteat@mail.uc.edu), and Zuguang Liu (liu2z2@mail.uc.edu)
+# Modular Garden Monitoring System
+*Senior Capstone Design Project | EECS Department, CEAS College, University of Cincinnati*
 
-## Documents
-Contains various assignments and documentation. See `Docs/`.
-DHF (Design History File) is located under `Docs/DHF/DHF-main.pdf`
+![](docs/poster-trifold.jpg)
 
-**WARNING: LaTeX pdfs are ignored. Please build them before submission.**
+**Team CE12**
+- Sadie Gladden (gladdesm@mail.uc.edu)
+- Alan Trester (tresteat@mail.uc.edu)
+- Zuguang Liu (liu2z2@mail.uc.edu)
+- Eric Krenz (krenzew@mail.uc.edu)
+- Technical advisor: Dr. Zachariah Fuchs (fuchsze@ucmail.uc.edu)
+- Academic instructor: Dr. Carla Purdy (purdycc@ucmail.uc.edu)
 
+# Project Description
+The MGMS is an IoT solution to help homeowners, garden enthusiasts, and farmers care for their lawns and gardens in a more informed and effective way while also reducing wasteful water usage.
+This proof-of-concept system designed over the 2020/2021 fall and spring semesters utilizes an AVR microcontroller and IEEE 802.15.4 wireless communication to provide real-time and historical information about outdoor or indoor environmental conditions while providing customized recommendations for optimal plant care.
 
+For detailed information, see [our virtual poster site](https://mgmsteam12.weebly.com/) and related [documents](docs).
 
-**We are moving over to Overleaf for document sharing.**
-
-## Overleaf Links
-
-
-|                   | Edit Link                                       | View Link                                  |
-| ----------------- | ----------------------------------------------- | ------------------------------------------ |
-| DHF               | https://www.overleaf.com/8919111665qkryxcwchdpd | https://www.overleaf.com/read/wnfpjqsxngsz |
-| Detailed Proposal | https://www.overleaf.com/8429958394rzqztdpdwqmv | https://www.overleaf.com/read/kzdxtgszkwhv |
-
-
-
-## Lecture files
-
-Contains documents that are downloaded on Canvas. See `LectureFiles/`.
-
-TODO
-- [x] Clean up and document code
-  - [x] C++ backend
-  - [x] Python frontend
-- [x] Properly include circuit design
-  - [x] Include Native Altium files
-  - [x] Document by README
-  - [x] Check KiCAD compatibility
-- [ ] Include documents
-  - [ ] LaTeX documents (.tex and .pdf)
-  - [x] Remove lecture files
-- [ ] Update main README
