@@ -27,8 +27,19 @@ System Control Scheme | System Network Topology
 ![](docs/final-report/PNGs/SystemDesign-autox400.PNG) | ![](docs/final-report/PNGs/SystemDiagram-autox400.jpg)
 
 Being a self-proposed project, this proof-of-concept system was designed over the 2020 - 2021 academic year to fulfill the team's senior design requirement.
-At the end, we were able to showcase part of the implementation, including the sensor module [hardware design](design/sensor-module/) and its [firmware](src/cpp-sensor-module/), as well as the [user application](src/python-gui/) at the front end.
+At the end, we were able to deliver part of the implementation, including the sensor module [hardware design](design/sensor-module/) and its [firmware](src/cpp-sensor-module/), as well as the [user application](src/python-gui/) at the front end.
 
 For detailed information, see our [virtual poster site](https://mgmsteam12.weebly.com/) and related [documents](docs).
 
 ## Directory Structure
+    .
+    ├── design                      # Hardware design root dir
+    │   └── sensor-module           # design files for sensor module
+    ├── src                         # Software source root dir
+    |   ├── cpp-sensor-module       # sensor module firmware
+    |   ├── python-gui              # frontend application
+    |   └── make-avr-template       # makefile template for avr-gcc
+    └── docs
+
+## License
+This project is licensed under the [MIT License](LICENSE).
