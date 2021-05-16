@@ -1,3 +1,4 @@
+# Makefile Template for AVR-GCC
 A simple template I made to compile and flash the AVR chip, by Liu.
 
 ## Usage
